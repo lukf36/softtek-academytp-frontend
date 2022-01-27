@@ -6,6 +6,7 @@ import { LoadingButton } from '@mui/lab';
 import useFetchPost from '../hooks/useFetchPost';
 import { useAppContext } from '../context/useAppContext';
 import { useNavigate } from 'react-router-dom';
+import URL from '../contants';
 
 const LoginPage = () => {
   let navigate = useNavigate();
@@ -17,7 +18,7 @@ const LoginPage = () => {
   const [error, setError] = useState('');
 
   const { sending, data, call, status, setChecked } = useFetchPost(
-    'http://localhost:8080/api/auth/signin'
+    `${URL}/auth/signin`
   );
 
   const handleLogin = () => {

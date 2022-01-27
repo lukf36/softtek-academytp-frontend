@@ -1,9 +1,12 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { useAppContext } from '../../context/useAppContext';
+import { useNavigate } from 'react-router-dom';
 
 const Header = () => {
-  const { user, clearUser, openCartModal } = useAppContext();
+  let navigate = useNavigate();
+
+  const { user, clearUser, openCartModal, accesible } = useAppContext();
 
   return (
     <div className="w-full flex justify-between items-center p-5 bg-gray-800 shadow-strong text-white">
@@ -21,9 +24,16 @@ const Header = () => {
         ) : (
           <>
             <p>Bienvenido {user.username}</p>
-            <button type='button' onClick={() => openCartModal()}>
-            <p className="hover:underline pl-5">Carrito</p>
-            </button>
+            {accesible(['ROLE_CLIENTE']) && (
+              <>
+                <button type="button" onClick={() => openCartModal()}>
+                  <p className="hover:underline pl-5">Carrito</p>
+                </button>
+                <button type="button" onClick={() => navigate('/miscompras')}>
+                  <p className="hover:underline pl-5">Mis compras</p>
+                </button>
+              </>
+            )}
             <button type="button" onClick={() => clearUser()}>
               <p className="hover:underline text-red-500 pl-5">Sign out</p>
             </button>

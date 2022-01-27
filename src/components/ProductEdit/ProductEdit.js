@@ -4,7 +4,7 @@ import TextField from '@mui/material/TextField';
 import { LoadingButton } from '@mui/lab';
 import useFetchPost from '../../hooks/useFetchPost';
 import { useNavigate } from 'react-router-dom';
-
+import URL from '../../contants';
 const ProductEdit = ({ product }) => {
   let navigate = useNavigate();
 
@@ -17,7 +17,7 @@ const ProductEdit = ({ product }) => {
   });
 
   const { call, sending, data, status } = useFetchPost(
-    'http://localhost:8080/api/producto'
+    `${URL}/producto`
   );
 
   const handleChange = (e) => {

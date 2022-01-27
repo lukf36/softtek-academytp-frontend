@@ -7,6 +7,7 @@ import useFetchPost from '../hooks/useFetchPost';
 import { useNavigate } from 'react-router-dom';
 import Navbar from '../components/Navbar/Navbar';
 import { useAppContext } from '../context/useAppContext';
+import URL from '../contants';
 
 const ProductCreate = () => {
   let navigate = useNavigate();
@@ -33,7 +34,7 @@ const ProductCreate = () => {
   });
 
   const { call, sending, error, data, status } = useFetchPost(
-    'http://localhost:8080/api/producto'
+    `${URL}/api/producto`
   );
 
   const handleChange = (e) => {

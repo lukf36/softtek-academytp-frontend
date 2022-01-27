@@ -9,6 +9,7 @@ import Navbar from '../components/Navbar/Navbar';
 import useFetch from '../hooks/useFetch';
 import { DataGrid } from '@mui/x-data-grid';
 import { useAppContext } from '../context/useAppContext';
+import URL from '../contants';
 
 const PromocionCreatePage = () => {
   let navigate = useNavigate();
@@ -22,10 +23,10 @@ const PromocionCreatePage = () => {
     }
   }, [accesible, navigate]);
 
-  const reqProduct = useFetch(`http://localhost:8080/api/producto`);
+  const reqProduct = useFetch(`${URL}/api/producto`);
 
   const { sending, call, data } = useFetchPost(
-    'http://localhost:8080/api/promocion'
+    `${URL}/promocion`
   );
 
   const [productos, setProductos] = useState([]);

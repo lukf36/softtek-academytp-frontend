@@ -11,7 +11,7 @@ const Navbar = ({ pageName }) => {
       id: 0,
       nombre: 'Home',
       link: '/',
-      role: ['ROLE_CLIENTE'],
+      role: ['ROLE_CLIENTE', 'ROLE_EMPLEADO', 'ROLE_ADMIN'],
     },
     {
       id: 1,
@@ -41,7 +41,7 @@ const Navbar = ({ pageName }) => {
       id: 5,
       nombre: 'Promociones',
       link: '/promociones',
-      role: ['ROLE_CLIENTE'],
+      role: ['ROLE_CLIENTE', 'ROLE_EMPLEADO', 'ROLE_ADMIN'],
     },
     {
       id: 6,

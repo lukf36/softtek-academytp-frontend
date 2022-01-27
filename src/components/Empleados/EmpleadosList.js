@@ -5,12 +5,12 @@ import CircularProgress from '@mui/material/CircularProgress';
 import Tooltip from '@mui/material/Tooltip';
 import { FaTrash } from 'react-icons/fa';
 import useFetchDelete from '../../hooks/useFetchDelete';
-
+import URL from '../../contants'
 const EmpleadosList = ({ dataNewEmpleado, handleSupervisorSelection }) => {
   const [empleados, setEmpleados] = useState([]);
 
   const { data, sending, error } = useFetch(
-    `http://localhost:8080/api/empleado`
+    `${URL}/empleado`
   );
 
   const delRequest = useFetchDelete();
@@ -63,7 +63,7 @@ const EmpleadosList = ({ dataNewEmpleado, handleSupervisorSelection }) => {
   ];
 
   const handleDeleteEmpleado = (id) => {
-    delRequest.call(`http://localhost:8080/api/empleado/${id}`);
+    delRequest.call(`${URL}/empleado/${id}`);
   };
 
   const handleSelectionChanged = (selection) => {

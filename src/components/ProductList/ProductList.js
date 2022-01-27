@@ -9,11 +9,11 @@ import { FaShoppingCart, FaEdit, FaTrash, FaDollarSign } from 'react-icons/fa';
 import { useNavigate } from 'react-router-dom';
 import DeleteDialog from '../DeleteDialog/DeleteDialog';
 import { useAppContext } from '../../context/useAppContext';
-
+import URL from '../../contants';
 const ProductList = () => {
   let navigate = useNavigate();
 
-  const { addProductToCart } = useAppContext();
+  const { addProductToCart, accesible } = useAppContext();
 
   const [pageStatus, setPageStatus] = useState({
     page: 0,
@@ -26,10 +26,10 @@ const ProductList = () => {
   const [isDeleteDialogOpen, setIsDeleteDialogOpen] = useState(false);
 
   const { data, sending, error } = useFetch(
-    `http://localhost:8080/api/producto?pageNo=${pageStatus.page}&pageSize=${pageStatus.pageSize}`
+    `${URL}/producto?pageNo=${pageStatus.page}&pageSize=${pageStatus.pageSize}`
   );
 
-  const countRequest = useFetch('http://localhost:8080/api/producto/count');
+  const countRequest = useFetch(`${URL}/producto/count`);
 
   const delRequest = useFetchDelete();
 
@@ -74,27 +74,34 @@ const ProductList = () => {
       flex: 1,
       renderCell: (params) => (
         <Stack spacing={2} direction="row">
-          <Tooltip title="Agregar al carrito" placement="top">
-            <button type="button" onClick={() => handleAddToCart(params.row)}>
-              <FaShoppingCart size={25} color="#023e8a" />
-            </button>
-          </Tooltip>
-          <Tooltip title="Editar" placement="top">
-            <button
-              type="button"
-              onClick={() => navigate(`/editproduct/${params.id}`)}
-            >
-              <FaEdit size={25} color="#023e8a" />
-            </button>
-          </Tooltip>
-          <Tooltip title="Borrar" placement="top">
-            <button
-              type="button"
-              onClick={() => handleDeleteProduct(params.id)}
-            >
-              <FaTrash size={25} color="#023e8a" />
-            </button>
-          </Tooltip>
+          {accesible(['ROLE_CLIENTE']) && (
+            <Tooltip title="Agregar al carrito" placement="top">
+              <button type="button" onClick={() => handleAddToCart(params.row)}>
+                <FaShoppingCart size={25} color="#023e8a" />
+              </button>
+            </Tooltip>
+          )}
+          {accesible(['ROLE_ADMIN', 'ROLE_EMPLEADO']) && (
+            <>
+              {' '}
+              <Tooltip title="Editar" placement="top">
+                <button
+                  type="button"
+                  onClick={() => navigate(`/editproduct/${params.id}`)}
+                >
+                  <FaEdit size={25} color="#023e8a" />
+                </button>
+              </Tooltip>
+              <Tooltip title="Borrar" placement="top">
+                <button
+                  type="button"
+                  onClick={() => handleDeleteProduct(params.id)}
+                >
+                  <FaTrash size={25} color="#023e8a" />
+                </button>
+              </Tooltip>
+            </>
+          )}
         </Stack>
       ),
     },
@@ -110,7 +117,7 @@ const ProductList = () => {
   };
 
   const handleDeleteProductById = (productId) => {
-    delRequest.call(`http://localhost:8080/api/producto/${productId}`);
+    delRequest.call(`${URL}/producto/${productId}`);
   };
 
   const handlePageChange = (page) => {

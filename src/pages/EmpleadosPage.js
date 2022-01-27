@@ -6,6 +6,7 @@ import EmpleadosCreate from '../components/Empleados/EmpleadosCreate';
 import useFetchPost from '../hooks/useFetchPost';
 import { useAppContext } from '../context/useAppContext';
 import { useNavigate } from 'react-router-dom';
+import URL from '../contants';
 
 const initEmpleado = {
   username: '',
@@ -25,7 +26,7 @@ const EmpleadosPage = () => {
   const { accesible } = useAppContext();
 
   const { sending, data, call, status } = useFetchPost(
-    'http://localhost:8080/api/auth/signupemp'
+    `${URL}/auth/signupemp`
   );
 
   const handleCreate = () => {

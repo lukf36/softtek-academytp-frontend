@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import Backdrop from '@mui/material/Backdrop';
 import Box from '@mui/material/Box';
 import Modal from '@mui/material/Modal';
@@ -9,7 +9,7 @@ import { FaTrash } from 'react-icons/fa';
 import { Stack } from '@mui/material';
 import { Button } from '@mui/material';
 import useFetchPost from '../../hooks/useFetchPost';
-import { useNavigate } from 'react-router-dom';
+import URL from '../../contants';
 
 const style = {
   position: 'absolute',
@@ -24,11 +24,7 @@ const style = {
 };
 
 const Cart = () => {
-  let navigate = useNavigate();
-
-  const { data, call } = useFetchPost(
-    'http://localhost:8080/api/orden/generarorden'
-  );
+  const { call } = useFetchPost(`${URL}/orden/generarorden`);
 
   const {
     closeCartModal,
@@ -47,14 +43,16 @@ const Cart = () => {
       };
     });
     call({ clienteId: user.id, detalles: pedidos });
+    clearCart();
+    closeCartModal();
   };
 
-  useEffect(() => {
-    if (data?.id) {
+  /*useEffect(() => {
+    if (data?.id && productsInCart?.length > 0) {
       clearCart();
       navigate('/');
     }
-  }, [data, navigate, clearCart]);
+  }, [data, navigate, clearCart, productsInCart]);*/
 
   return (
     <Modal
@@ -78,7 +76,7 @@ const Cart = () => {
           </Typography>
           {productsInCart.map((p) => {
             return (
-              <div key={p.id} className="flex items-center py-2">
+              <div key={p.id} className="flex w-full justify-between items-center py-2">
                 <p>
                   {p.nombre}, cantidad: {p.cantidad}
                 </p>
@@ -96,7 +94,9 @@ const Cart = () => {
             <Button variant="contained" onClick={handleSendOrden}>
               Enviar compra
             </Button>
-            <Button variant="text">Limpiar carrito</Button>
+            <Button variant="text" onClick={() => clearCart()}>
+              Limpiar carrito
+            </Button>
           </Stack>
         </Box>
       </Fade>

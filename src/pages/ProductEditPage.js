@@ -7,6 +7,7 @@ import Header from '../components/Header/Header';
 import Navbar from '../components/Navbar/Navbar';
 import { useAppContext } from '../context/useAppContext';
 import { useNavigate } from 'react-router-dom';
+import URL from '../contants';
 
 const ProductEditPage = () => {
   let { productId } = useParams();
@@ -23,7 +24,7 @@ const ProductEditPage = () => {
   }, [accesible, navigate]);
 
   const { data, sending, error } = useFetch(
-    `http://localhost:8080/api/producto/${productId}`
+    `${URL}/producto/${productId}`
   );
 
   if (sending) {

@@ -1,10 +1,10 @@
 import React from 'react';
 import useFetch from '../../hooks/useFetch';
 import CircularProgress from '@mui/material/CircularProgress';
-
+import URL from '../../contants';
 const ProductDetails = ({ productId }) => {
   const { data, sending, error } = useFetch(
-    `http://localhost:8080/api/producto/${productId}`
+    `${URL}/producto/${productId}`
   );
 
   if (sending) {

@@ -34,11 +34,11 @@ const AppContextProvider = ({ children }) => {
   };
 
   const accesible = (role) => {
-    if (role.includes('ROLE_CLIENTE')) {
-      return true;
-    } else {
+    //if (role.includes('ROLE_CLIENTE')) {
+    //  return true;
+    //} else {
       return user?.roles.reduce((acc, r) => acc || role.includes(r), false);
-    }
+    //}
   };
 
   useEffect(() => {
@@ -61,8 +61,8 @@ const AppContextProvider = ({ children }) => {
           prod,
         ]);
       } else {
-        prod = { ...prodToAdd, cantidad: 1 };
-        setProductsInCart([...productsInCart, prod]);
+        console.log(prodToAdd)
+        setProductsInCart([...productsInCart, { ...prodToAdd, cantidad: 1 }]);
       }
     }
   };

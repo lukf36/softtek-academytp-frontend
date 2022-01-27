@@ -6,12 +6,12 @@ import Stack from '@mui/material/Stack';
 import Tooltip from '@mui/material/Tooltip';
 import { FaTrash } from 'react-icons/fa';
 import useFetchDelete from '../../hooks/useFetchDelete';
-
+import URL from '../../contants';
 const PromocionesList = () => {
   const [promociones, setPromociones] = useState([]);
 
   const { data, sending, error } = useFetch(
-    `http://localhost:8080/api/promocion`
+    `${URL}/promocion`
   );
 
   const delRequest = useFetchDelete();
@@ -67,7 +67,7 @@ const PromocionesList = () => {
               type="button"
               onClick={() =>
                 delRequest.call(
-                  `http://localhost:8080/api/promocion/${params.id}`
+                  `${URL}/promocion/${params.id}`
                 )
               }
             >

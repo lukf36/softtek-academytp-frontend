@@ -7,14 +7,14 @@ import useFetchDelete from '../../hooks/useFetchDelete';
 import { FaTrash, FaEdit } from 'react-icons/fa';
 import { useNavigate } from 'react-router-dom';
 import CircularProgress from '@mui/material/CircularProgress';
-
+import URL from '../../contants';
 const ProveedoresList = () => {
   let navigate = useNavigate();
 
   const [proveedores, setProveedores] = useState([]);
 
   const { data, sending, error } = useFetch(
-    `http://localhost:8080/api/proveedor`
+    `${URL}/proveedor`
   );
 
   const delRequest = useFetchDelete();
@@ -62,7 +62,7 @@ const ProveedoresList = () => {
   ];
 
   const handleDeleteProveedor = (id) => {
-    delRequest.call(`http://localhost:8080/api/proveedor/${id}`);
+    delRequest.call(`${URL}/proveedor/${id}`);
   };
 
   useEffect(() => {

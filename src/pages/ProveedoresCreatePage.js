@@ -9,6 +9,7 @@ import Navbar from '../components/Navbar/Navbar';
 import { DataGrid } from '@mui/x-data-grid';
 import useFetch from '../hooks/useFetch';
 import { useAppContext } from '../context/useAppContext';
+import URL from '../contants';
 
 const ProveedoresCreatePage = () => {
   let navigate = useNavigate();
@@ -31,10 +32,10 @@ const ProveedoresCreatePage = () => {
   });
 
   const { sending, call, data } = useFetchPost(
-    'http://localhost:8080/api/proveedor'
+    `${URL}/proveedor`
   );
 
-  const catRequest = useFetch('http://localhost:8080/api/categoria');
+  const catRequest = useFetch(`${URL}/categoria`);
 
   const columns = [
     { field: 'id', headerName: 'ID', width: 20, editable: false },

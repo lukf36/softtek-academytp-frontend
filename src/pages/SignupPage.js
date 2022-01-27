@@ -40,7 +40,7 @@ const SignupPage = () => {
   const [passwordHelperText, setPasswordHelperText] = useState('');
 
   const { call, sending, data } = useFetchPost(
-    'http://localhost:8080/api/auth/signupcli'
+    `${URL}/auth/signupcli`
   );
 
   const handleRegister = () => {

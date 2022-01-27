@@ -9,6 +9,7 @@ import TextField from '@mui/material/TextField';
 import { LoadingButton } from '@mui/lab';
 import useFetchPost from '../../hooks/useFetchPost';
 import useFetchDelete from '../../hooks/useFetchDelete';
+import URL from '../../contants';
 
 const CategoryList = () => {
   const [categorias, setCategorias] = useState([]);
@@ -16,10 +17,10 @@ const CategoryList = () => {
   const [newCategoriaError, setNewCategoriaError] = useState('');
 
   const { data, sending, error } = useFetch(
-    `http://localhost:8080/api/categoria`
+    `${URL}/categoria`
   );
 
-  const createCatRequest = useFetchPost('http://localhost:8080/api/categoria');
+  const createCatRequest = useFetchPost(`${URL}/categoria`);
 
   const delCatRequest = useFetchDelete();
 
@@ -44,7 +45,7 @@ const CategoryList = () => {
             type="button"
             onClick={() =>
               delCatRequest.call(
-                `http://localhost:8080/api/categoria/${params.id}`
+                `${URL}/categoria/${params.id}`
               )
             }
           >
