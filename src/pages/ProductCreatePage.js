@@ -34,7 +34,7 @@ const ProductCreate = () => {
   });
 
   const { call, sending, error, data, status } = useFetchPost(
-    `${URL}/api/producto`
+    `${URL}/producto`
   );
 
   const handleChange = (e) => {

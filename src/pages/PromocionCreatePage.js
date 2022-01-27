@@ -23,7 +23,7 @@ const PromocionCreatePage = () => {
     }
   }, [accesible, navigate]);
 
-  const reqProduct = useFetch(`${URL}/api/producto`);
+  const reqProduct = useFetch(`${URL}/producto`);
 
   const { sending, call, data } = useFetchPost(
     `${URL}/promocion`
