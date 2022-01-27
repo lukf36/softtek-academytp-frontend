@@ -11,7 +11,7 @@ const Navbar = ({ pageName }) => {
       id: 0,
       nombre: 'Home',
       link: '/',
-      role: ['ROLE_CLIENTE', 'ROLE_EMPLEADO', 'ROLE_ADMIN'],
+      role: ['ROLE_CLIENTE', 'ROLE_EMPLEADO', 'ROLE_ADMIN', 'ALL'],
     },
     {
       id: 1,
@@ -41,7 +41,7 @@ const Navbar = ({ pageName }) => {
       id: 5,
       nombre: 'Promociones',
       link: '/promociones',
-      role: ['ROLE_CLIENTE', 'ROLE_EMPLEADO', 'ROLE_ADMIN'],
+      role: ['ROLE_CLIENTE', 'ROLE_EMPLEADO', 'ROLE_ADMIN', 'ALL'],
     },
     {
       id: 6,
@@ -61,7 +61,7 @@ const Navbar = ({ pageName }) => {
     <div className="w-full flex justify-center items-center pt-10">
       <Stack spacing={2} direction="row">
         {navbarLinks.map(({ id, nombre, link, role }) => {
-          if (accesible(role)) {
+          if (accesible(role) || role.includes('ALL')) {
             return (
               <Link key={id} to={link}>
                 <p
