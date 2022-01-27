@@ -8,9 +8,19 @@ import { useNavigate } from 'react-router-dom';
 import Navbar from '../components/Navbar/Navbar';
 import useFetch from '../hooks/useFetch';
 import { DataGrid } from '@mui/x-data-grid';
+import { useAppContext } from '../context/useAppContext';
 
 const PromocionCreatePage = () => {
   let navigate = useNavigate();
+
+  const { accesible } = useAppContext();
+
+  useEffect(() => {
+    const roles = ['ROLE_EMPLEADO', 'ROLE_ADMIN'];
+    if (!accesible(roles)) {
+      navigate('/');
+    }
+  }, [accesible, navigate]);
 
   const reqProduct = useFetch(`http://localhost:8080/api/producto`);
 

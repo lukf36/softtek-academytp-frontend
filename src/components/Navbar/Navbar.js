@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import { useAppContext } from '../../context/useAppContext';
 
 const Navbar = ({ pageName }) => {
-  const { user } = useAppContext();
+  const { accesible } = useAppContext();
 
   const navbarLinks = [
     {
@@ -56,14 +56,6 @@ const Navbar = ({ pageName }) => {
       role: ['ROLE_ADMIN'],
     },
   ];
-
-  const accesible = (role) => {
-    if (role.includes('ROLE_CLIENTE')) {
-      return true;
-    } else {
-      return user?.roles.reduce((acc, r) => acc || role.includes(r), false);
-    }
-  };
 
   return (
     <div className="w-full flex justify-center items-center pt-10">

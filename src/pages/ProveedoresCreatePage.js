@@ -8,9 +8,19 @@ import { useNavigate } from 'react-router-dom';
 import Navbar from '../components/Navbar/Navbar';
 import { DataGrid } from '@mui/x-data-grid';
 import useFetch from '../hooks/useFetch';
+import { useAppContext } from '../context/useAppContext';
 
 const ProveedoresCreatePage = () => {
   let navigate = useNavigate();
+
+  const { accesible } = useAppContext();
+
+  useEffect(() => {
+    const roles = ['ROLE_EMPLEADO', 'ROLE_ADMIN'];
+    if (!accesible(roles)) {
+      navigate('/');
+    }
+  }, [accesible, navigate]);
 
   const [categorias, setCategorias] = useState([]);
 

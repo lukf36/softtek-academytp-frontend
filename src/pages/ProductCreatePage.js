@@ -6,9 +6,19 @@ import Header from '../components/Header/Header';
 import useFetchPost from '../hooks/useFetchPost';
 import { useNavigate } from 'react-router-dom';
 import Navbar from '../components/Navbar/Navbar';
+import { useAppContext } from '../context/useAppContext';
 
 const ProductCreate = () => {
   let navigate = useNavigate();
+
+  const { accesible } = useAppContext();
+
+  useEffect(() => {
+    const roles = ['ROLE_EMPLEADO', 'ROLE_ADMIN'];
+    if (!accesible(roles)) {
+      navigate('/');
+    }
+  }, [accesible, navigate]);
 
   const [newProduct, setNewProduct] = useState({
     nombre: '',

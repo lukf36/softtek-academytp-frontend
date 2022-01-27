@@ -33,6 +33,14 @@ const AppContextProvider = ({ children }) => {
     }
   };
 
+  const accesible = (role) => {
+    if (role.includes('ROLE_CLIENTE')) {
+      return true;
+    } else {
+      return user?.roles.reduce((acc, r) => acc || role.includes(r), false);
+    }
+  };
+
   useEffect(() => {
     setUser(JSON.parse(localStorage.getItem('user')));
   }, []);
@@ -79,6 +87,7 @@ const AppContextProvider = ({ children }) => {
         removeProuctFromCart,
         getAccessToken,
         getAuthorization,
+        accesible,
       }}
     >
       {children}

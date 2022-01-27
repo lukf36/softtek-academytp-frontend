@@ -4,6 +4,8 @@ import Navbar from '../components/Navbar/Navbar';
 import EmpleadosList from '../components/Empleados/EmpleadosList';
 import EmpleadosCreate from '../components/Empleados/EmpleadosCreate';
 import useFetchPost from '../hooks/useFetchPost';
+import { useAppContext } from '../context/useAppContext';
+import { useNavigate } from 'react-router-dom';
 
 const initEmpleado = {
   username: '',
@@ -14,9 +16,13 @@ const initEmpleado = {
 };
 
 const EmpleadosPage = () => {
+  let navigate = useNavigate();
+
   const [newEmpleado, setNewEmpleado] = useState({ ...initEmpleado });
 
   const [newEmpleadoError, setNewEmpleadoError] = useState({ ...initEmpleado });
+
+  const { accesible } = useAppContext();
 
   const { sending, data, call, status } = useFetchPost(
     'http://localhost:8080/api/auth/signupemp'
@@ -48,6 +54,13 @@ const EmpleadosPage = () => {
       setNewEmpleadoError({ ...data });
     }
   }, [data, status]);
+
+  useEffect(() => {
+    const roles = ['ROLE_ADMIN'];
+    if (!accesible(roles)) {
+      navigate('/');
+    }
+  }, [accesible, navigate]);
 
   return (
     <div className="w-full">
