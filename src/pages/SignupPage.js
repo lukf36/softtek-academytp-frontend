@@ -9,6 +9,7 @@ import InputLabel from '@mui/material/InputLabel';
 import FormControl from '@mui/material/FormControl';
 import useFetchPost from '../hooks/useFetchPost';
 import { useNavigate } from 'react-router-dom';
+import URL from '../contants';
 
 const SignupPage = () => {
   let navigate = useNavigate();
@@ -39,9 +40,7 @@ const SignupPage = () => {
 
   const [passwordHelperText, setPasswordHelperText] = useState('');
 
-  const { call, sending, data } = useFetchPost(
-    `${URL}/auth/signupcli`
-  );
+  const { call, sending, data } = useFetchPost(`${URL}/auth/signupcli`);
 
   const handleRegister = () => {
     call({
